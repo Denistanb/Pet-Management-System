@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Pet Details</title>
+    
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@700&display=swap" rel="stylesheet">  
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="public/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* [Team-No-08 CSS remains unchanged] */
+        .brand-identifier {
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(90deg, #FF6B6B, #FFE66D, #4ECDC4, #6A5ACD, #FF6B6B);
+            background-size: 400% 400%;
+            animation: gradient-shift 10s ease infinite;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand-identifier span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            display: inline-block;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.5);
+            animation: float 2s ease-in-out infinite;
+            animation-delay: calc(0.2s * var(--i));
+            margin: 0 2px;
+            position: relative;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+
+        .brand-identifier span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 50%;
+            filter: blur(4px);
+            opacity: 0.7;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .brand-identifier span {
+                font-size: 36px;
+            }
+        }
+        .brand-identifier::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0.2;
+            animation: sparkle 6s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: translateX(-30%) translateY(-20%) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateX(30%) translateY(20%) rotate(360deg); opacity: 0; }
+        }
+        
+        .brand-identifier span {
+            display: inline-block;
+            transform: translateY(0);
+            animation: letter-float 3s ease-in-out infinite;
+            animation-delay: calc(0.1s * var(--i));
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes letter-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+            25% { transform: translateY(-10px) rotate(-5deg); text-shadow: 0 0 15px rgba(255,255,255,0.9), 0 0 20px var(--accent); }
+            75% { transform: translateY(-5px) rotate(5deg); text-shadow: 0 0 15px rgba(255,255,255,0.9), 0 0 20px var(--primary); }
+        }
+        
+        .brand-identifier span:nth-child(odd) {
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary), 0 0 20px rgba(255,107,107,0.8);
+        }
+        
+        .brand-identifier span:nth-child(even) {
+            color: #fff;
+            text-shadow: 0 0 10px var(--secondary), 0 0 20px rgba(78,205,196,0.8);
+        }
+        
+        .brand-identifier span:nth-child(3n) {
+            color: #fff;
+            text-shadow: 0 0 10px var(--accent), 0 0 20px rgba(255,230,109,0.8);
+        }
+        .animated-element {
+            transition: all 0.5s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .topbar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topbar i {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            line-height: 50px;
+            text-align: center;
+            margin-right: 15px;
+            transition: all 0.3s;
+        }
+        
+        .topbar i:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: rotate(10deg);
+        }
+        
+        .navbar {
+            background-color: white !important;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .navbar-brand h1 {
+            color: var(--dark);
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand i {
+            color: var(--primary);
+        }
+        
+        .nav-item .nav-link {
+            font-family: 'Roboto', sans-serif;
+            position: relative;
+            margin-left: 30px;
+            padding: 30px 0;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--dark);
+            outline: none;
+            transition: .9s;
+        }
+        
+        .nav-item .nav-link:hover {
+            background-color: rgba(255, 107, 107, 0.1);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .nav-item .nav-link.active {
+            background-color: rgba(255, 107, 107, 0.2);
+            color: var(--primary);
+        }
+        
+        .nav-contact {
+            background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
+            padding: 12px 25px;
+            margin-left: 15px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+            transition: 0.3s;
+        }
+
+        .nav-contact:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .bg-light {
+            background-color: #f8f9fa !important;
+        }
+        
+        .footer-top {
+            background-color: #f8f9fa;
+            padding: 70px 0 40px;
+        }
+        
+        .footer-info {
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .footer-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer-bottom {
+            background: linear-gradient(90deg, var(--dark) 0%, #23282f 100%);
+            padding: 20px 0;
+        }
+        
+        .newsletter-form {
+            position: relative;
+            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .newsletter-form input {
+            border-radius: 30px;
+            padding: 15px 25px;
+            border: none;
+        }
+        
+        .newsletter-form button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            border-radius: 0 30px 30px 0;
+            padding: 0 25px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+        .chatbot-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            z-index: 9999;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-button i {
+            margin-right: 10px;
+            font-size: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .chatbot-button:hover {
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.25);
+            color: white;
+            text-decoration: none;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Form Styling */
+        #updateForm {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .form-group button[type="button"] {
+            background: #007bff;
+            margin-top: 5px;
+        }
+
+        .form-group button[type="button"]:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="brand-identifier">
+        <span style="--i:1">T</span>
+        <span style="--i:2">E</span>
+        <span style="--i:3">A</span>
+        <span style="--i:4">M</span>
+        <span style="--i:5">-</span>
+        <span style="--i:6">N</span>
+        <span style="--i:7">O</span>
+        <span style="--i:8">-</span>
+        <span style="--i:9">0</span>
+        <span style="--i:10">8</span>
+    </div>
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0 mb-5">
+        <a href="/update.html" class="navbar-brand ms-lg-5">
+            <h1 class="m-0 text-uppercase text-dark"><i class="bi bi-shop fs-1 text-primary me-3"></i>Paw Store</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="home.html" class="nav-item nav-link">Home</a>
+                <a href="entry.html" class="nav-item nav-link active">Entry</a>
+                <a href="petlist.html" class="nav-item nav-link">Pet list</a>
+            </div>       
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <h2>Update Pet Details</h2>
+    <form id="updateForm">
+        <div class="form-group">
+            <label for="petId">Pet ID:</label>
+            <input type="text" id="petId" placeholder="Enter Pet ID" required>
+            <button type="button" onclick="fetchPetDetails()">Fetch Details</button>
+        </div>
+        
+        <div class="form-group">
+            <label for="species">Species:</label>
+            <input type="text" id="species" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="breed">Breed:</label>
+            <input type="text" id="breed" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="photo">Photo URL:</label>
+            <input type="text" id="photo">
+        </div>
+        
+        <div class="form-group">
+            <button type="submit">Update Pet</button>
+        </div>
+    </form>
+
+    <script>
+        async function fetchPetDetails() {
+            const petId = document.getElementById('petId').value.trim();
+            if (!petId) {
+                alert('Please enter a valid Pet ID.');
+                return;
+            }
+            try {
+                const response = await fetch(`http://localhost:5000/api/pets/${petId}`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Pet not found');
+                }
+
+                const pet = await response.json();
+                document.getElementById('species').value = pet.species;
+                document.getElementById('breed').value = pet.breed;
+                document.getElementById('gender').value = pet.gender;
+                document.getElementById('location').value = pet.location;
+                document.getElementById('description').value = pet.description;
+                document.getElementById('photo').value = pet.photo || '';
+            } catch (error) {
+                alert('Error fetching pet details: ' + error.message);
+            }
+        }
+
+        document.getElementById('updateForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const petId = document.getElementById('petId').value.trim();
+            const updatedPet = {
+                species: document.getElementById('species').value,
+                breed: document.getElementById('breed').value,
+                gender: document.getElementById('gender').value,
+                location: document.getElementById('location').value,
+                description: document.getElementById('description').value,
+                photo: document.getElementById('photo').value
+            };
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/pets/${petId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedPet)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert('Pet updated successfully!');
+                    window.location.href = 'petlist.html'; // Redirect to pet list after update
+                } else {
+                    alert('Error updating pet: ' + (result.error || 'Unknown error'));
+                }
+            } catch (error) {
+                alert('Failed to update pet: ' + error.message);
+                console.error('Fetch error:', error);
+            }
+        });
+    </script>
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 py-4">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-md-0">© <a class="text-white" href="#">Paw Store</a>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Designed by:<a class="text-white" href="https://htmlcodex.com">Team-No-08</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+</body>
+</html>

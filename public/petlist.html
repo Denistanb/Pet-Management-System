@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Registry - List of Pets</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- Favicon -->
+  <link href="/img/favicon.ico" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="/public/css/style.css" rel="stylesheet">
+
+  <style>
+    .pr-pet-list-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .pr-section-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .pr-pet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .pr-pet-card {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      background-color: #fff;
+    }
+    
+    .pr-pet-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .pr-pet-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .pr-pet-details {
+      padding: 15px;
+    }
+    
+    .pr-pet-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 0 0 5px 0;
+    }
+    
+    .pr-pet-breed {
+      color: #666;
+      font-style: italic;
+      margin: 0 0 10px 0;
+    }
+    
+    .pr-pet-description {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .pr-pet-location {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .pr-pet-location i {
+      margin-right: 5px;
+      color: #e74c3c;
+    }
+    
+    .pr-no-pets {
+      text-align: center;
+      grid-column: 1 / -1;
+      padding: 50px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+    }
+    
+    .pr-loading {
+      text-align: center;
+      grid-column: 1 / -1;
+      padding: 50px;
+    }
+    
+    .pr-return-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    
+    .pr-return-btn:hover {
+      background-color: #2980b9;
+    }
+
+    .brand-identifier {
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(90deg, #FF6B6B, #FFE66D, #4ECDC4, #6A5ACD, #FF6B6B);
+      background-size: 400% 400%;
+      animation: gradient-shift 10s ease infinite;
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,255,255,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .brand-identifier span {
+      font-family: 'Poppins', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      display: inline-block;
+      color: white;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.5);
+      animation: float 2s ease-in-out infinite;
+      animation-delay: calc(0.2s * var(--i));
+      margin: 0 2px;
+      position: relative;
+    }
+    
+    .brand-identifier span::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      filter: blur(4px);
+      opacity: 0.7;
+    }
+    
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    
+    @media (max-width: 768px) {
+      .brand-identifier span {
+        font-size: 36px;
+      }
+    }
+    
+    .brand-identifier::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0.2;
+      animation: sparkle 6s linear infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes sparkle {
+      0% { transform: translateX(-30%) translateY(-20%) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.6; }
+      100% { transform: translateX(30%) translateY(20%) rotate(360deg); opacity: 0; }
+    }
+    
+    .brand-identifier span {
+      display: inline-block;
+      transform: translateY(0);
+      animation: letter-float 3s ease-in-out infinite;
+      animation-delay: calc(0.1s * var(--i));
+      position: relative;
+      z-index: 1;
+    }
+    
+    @keyframes letter-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+      25% { transform: translateY(-10px) rotate(-5deg); text-shadow: 0 0 15px rgba(255,255,255,0.9); }
+      75% { transform: translateY(-5px) rotate(5deg); text-shadow: 0 0 15px rgba(255,255,255,0.9); }
+    }
+    
+    .navbar {
+      background-color: white !important;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+    
+    .navbar-brand h1 {
+      color: #292F36;
+      text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand i {
+      color: #FF6B6B;
+    }
+    
+    .nav-item .nav-link {
+      font-family: 'Roboto', sans-serif;
+      position: relative;
+      margin-left: 30px;
+      padding: 30px 0;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #292F36;
+      outline: none;
+      transition: .9s;
+    }
+    
+    .nav-item .nav-link:hover {
+      background-color: rgba(255, 107, 107, 0.1);
+      color: #FF6B6B;
+      transform: translateY(-3px);
+    }
+    
+    .nav-item .nav-link.active {
+      background-color: rgba(255, 107, 107, 0.2);
+      color: #FF6B6B;
+    }
+    
+    .pr-search-form {
+      margin: 20px 0;
+    }
+    
+    .pr-input-group {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .pr-search-input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 2px solid #ddd;
+      border-radius: 5px 0 0 5px;
+      font-size: 1rem;
+    }
+    
+    .pr-search-btn {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .pr-search-btn:hover {
+      background-color: #2980b9;
+    }
+    
+    .pr-pet-single {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .pr-pet-single {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .pr-pet-single .pr-pet-image {
+      height: 300px;
+      border-radius: 10px;
+    }
+    
+    .pr-pet-single .pr-pet-details {
+      padding: 20px;
+    }
+    
+    .pr-pet-single .pr-pet-name {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+    
+    .pr-pet-single .pr-pet-breed {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    
+    .pr-pet-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      padding: 15px 0;
+    }
+    
+    .pr-pet-info-item {
+      display: flex;
+      align-items: center;
+    }
+    
+    .pr-pet-info-item i {
+      width: 30px;
+      height: 30px;
+      background-color: #f8f9fa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      color: #3498db;
+    }
+    
+    .pr-pet-desc-title {
+      font-size: 1.2rem;
+      margin: 15px 0 10px 0;
+    }
+    
+    .pr-pet-single .pr-pet-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .pr-pet-actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    
+    .pr-back-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #6c757d;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    
+    .pr-back-btn:hover {
+      background-color: #5a6268;
+      color: white;
+    }
+    
+    .pr-pet-view-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 15px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      transition: background-color 0.3s;
+    }
+    
+    .pr-pet-view-btn:hover {
+      background-color: #2980b9;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="brand-identifier">
+    <span style="--i:1">T</span>
+    <span style="--i:2">E</span>
+    <span style="--i:3">A</span>
+    <span style="--i:4">M</span>
+    <span style="--i:5">-</span>
+    <span style="--i:6">N</span>
+    <span style="--i:7">O</span>
+    <span style="--i:8">-</span>
+    <span style="--i:9">0</span>
+    <span style="--i:10">8</span>
+  </div>
+
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0 mb-5">
+    <a href="/petlist.html" class="navbar-brand ms-lg-5">
+      <h1 class="m-0 text-uppercase text-dark"><i class="bi bi-shop fs-1 text-primary me-3"></i>Paw Store</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav ms-auto py-0">
+        <a href="/home.html" class="nav-item nav-link">Home</a>
+        <a href="/entry.html" class="nav-item nav-link">Entry</a>
+        <a href="/petlist.html" class="nav-item nav-link active">Pet List</a>
+      </div>       
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <div class="pr-pet-list-container">
+    <div class="pr-section-header">
+      <h2 class="pr-floating">🐾 Registered Pets</h2>
+      <p>Meet all the adorable companions in our registry!</p>
+      <a href="/entry.html" class="pr-return-btn">
+        <i class="fas fa-plus-circle"></i> Register Another Pet
+      </a>
+    </div>
+    
+    <div class="pr-pet-grid" id="pet-grid">
+      <div class="pr-loading">
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+        <p>Loading pets...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-white-50 py-4">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-md-0">© <a class="text-white" href="#">Paw Store</a>. All Rights Reserved.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <p class="mb-0">Designed by: <a class="text-white" href="https://htmlcodex.com">Team-No-08</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const petGrid = document.getElementById('pet-grid');
+      const searchParams = new URLSearchParams(window.location.search);
+      const petId = searchParams.get('id');
+      
+      // Function to fetch all pets or specific pet by ID
+      function fetchPets() {
+        const endpoint = petId ? `http://localhost:5000/api/pets/${petId}` : 'http://localhost:5000/api/pets';
+        
+        fetch(endpoint, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            petGrid.innerHTML = '';
+            
+            const pets = Array.isArray(data) ? data : [data];
+            
+            if (pets.length === 0 || (petId && !data.petId)) {
+              displayNoPetsMessage();
+              return;
+            }
+            
+            pets.forEach(pet => {
+              const petCard = createPetCard(pet);
+              petGrid.appendChild(petCard);
+            });
+            
+            if (petId) {
+              updateHeaderForSinglePet();
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching pets:', error);
+            displayErrorMessage(petId ? 'Pet not found' : 'Error loading pets');
+          });
+      }
+      
+      // Function to display no pets message
+      function displayNoPetsMessage() {
+        petGrid.innerHTML = `
+          <div class="pr-no-pets">
+            <i class="fas fa-paw fa-3x" style="color: #ccc; margin-bottom: 15px;"></i>
+            <h3>${petId ? 'Pet Not Found' : 'No pets registered yet'}</h3>
+            <p>${petId ? 'The pet with this ID does not exist.' : 'Be the first to add your pet to our registry!'}</p>
+            <a href="${petId ? '/petlist.html' : '/entry.html'}" class="pr-return-btn">
+              <i class="fas fa-${petId ? 'list' : 'plus-circle'}"></i> ${petId ? 'View All Pets' : 'Register a Pet'}
+            </a>
+          </div>
+        `;
+      }
+      
+      // Function to display error message
+      function displayErrorMessage(message) {
+        petGrid.innerHTML = `
+          <div class="pr-no-pets">
+            <i class="fas fa-exclamation-triangle fa-3x" style="color: #e74c3c; margin-bottom: 15px;"></i>
+            <h3>${message}</h3>
+            <p>${petId ? `We couldn't find a pet with ID: ${petId}` : 'There was a problem loading the pet registry. Please try again later.'}</p>
+            <a href="/petlist.html" class="pr-return-btn">
+              <i class="fas fa-list"></i> View All Pets
+            </a>
+          </div>
+        `;
+      }
+      
+      // Function to update header when viewing a single pet
+      function updateHeaderForSinglePet() {
+        const sectionHeader = document.querySelector('.pr-section-header');
+        if (sectionHeader) {
+          sectionHeader.querySelector('h2').textContent = '🐾 Pet Details';
+          sectionHeader.querySelector('p').textContent = 'Viewing details for the selected pet';
+          sectionHeader.querySelector('.pr-return-btn').style.display = 'none'; // Hide register button
+        }
+      }
+      
+      // Function to create a pet card element
+      function createPetCard(pet) {
+        const card = document.createElement('div');
+        card.className = 'pr-pet-card';
+        
+        const photoSrc = pet.photo || 'https://via.placeholder.com/300x200?text=No+Photo';
+        const description = pet.description || 'No description available';
+        
+        if (petId) {
+          card.className = 'pr-pet-card pr-pet-single';
+          card.innerHTML = `
+            <img src="${photoSrc}" alt="${pet.species} - ${pet.breed}" class="pr-pet-image">
+            <div class="pr-pet-details">
+              <h3 class="pr-pet-name">${pet.species.charAt(0).toUpperCase() + pet.species.slice(1)}</h3>
+              <p class="pr-pet-breed">${pet.breed || 'Unknown breed'}</p>
+              <div class="pr-pet-info-grid">
+                <div class="pr-pet-info-item">
+                  <i class="fas fa-id-card"></i>
+                  <span>ID: ${pet.petId}</span>
+                </div>
+                <div class="pr-pet-info-item">
+                  <i class="fas fa-venus-mars"></i>
+                  <span>Gender: ${pet.gender}</span>
+                </div>
+                ${pet.location ? `
+                  <div class="pr-pet-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Location: ${pet.location}</span>
+                  </div>
+                ` : ''}
+              </div>
+              <h4 class="pr-pet-desc-title">Description</h4>
+              <p class="pr-pet-description">${description}</p>
+              <div class="pr-pet-actions">
+                <a href="/petlist.html" class="pr-back-btn">
+                  <i class="fas fa-arrow-left"></i> Back to All Pets
+                </a>
+              </div>
+            </div>
+          `;
+        } else {
+          card.innerHTML = `
+            <img src="${photoSrc}" alt="${pet.species} - ${pet.breed}" class="pr-pet-image">
+            <div class="pr-pet-details">
+              <h3 class="pr-pet-name">${pet.species.charAt(0).toUpperCase() + pet.species.slice(1)}</h3>
+              <p class="pr-pet-breed">${pet.breed || 'Unknown breed'}</p>
+              <p class="pr-pet-description" style="-webkit-line-clamp: 3;">${description.substring(0, 100)}${description.length > 100 ? '...' : ''}</p>
+              ${pet.location ? `
+                <div class="pr-pet-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>${pet.location}</span>
+                </div>
+              ` : ''}
+              <a href="/petlist.html?id=${pet.petId}" class="pr-pet-view-btn">
+                <i class="fas fa-eye"></i> View Details
+              </a>
+            </div>
+          `;
+        }
+        
+        return card;
+      }
+      
+      // Function to add search form
+      function addSearchForm() {
+        const sectionHeader = document.querySelector('.pr-section-header');
+        if (sectionHeader && !petId) {
+          const searchForm = document.createElement('div');
+          searchForm.className = 'pr-search-form';
+          searchForm.innerHTML = `
+            <form id="pet-search-form">
+              <div class="pr-input-group">
+                <input type="text" id="pet-id-input" placeholder="Enter Pet ID (e.g., DogLabradorM1234)" class="pr-search-input">
+                <button type="submit" class="pr-search-btn">
+                  <i class="fas fa-search"></i> Find Pet
+                </button>
+              </div>
+            </form>
+          `;
+          sectionHeader.appendChild(searchForm);
+          
+          document.getElementById('pet-search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchId = document.getElementById('pet-id-input').value.trim();
+            if (searchId) {
+              window.location.href = `/petlist.html?id=${searchId}`;
+            }
+          });
+        }
+      }
+      
+      // Initialize the page
+      addSearchForm();
+      fetchPets();
+    });
+  </script>
+</body>
+</html>

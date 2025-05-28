@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>PAW FINDERS - Premium Pet Adoption & Care</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Pet Adoption, Pet Care, Animal Rescue" name="keywords">
+    <meta content="Find your perfect furry companion at Paw Finders" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.2?family=Poppins:wght@400;500;600;700;900&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="public/css/style.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --accent: #FFE66D;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+        }
+        
+        .animated-element {
+            transition: all 0.5s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .brand-identifier {
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(90deg, #FF6B6B, #FFE66D, #4ECDC4, #6A5ACD, #FF6B6B);
+            background-size: 400% 400%;
+            animation: gradient-shift 10s ease infinite;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand-identifier span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            display: inline-block;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.5);
+            animation: float 2s ease-in-out infinite;
+            animation-delay: calc(0.2s * var(--i));
+            margin: 0 2px;
+            position: relative;
+        }
+        
+        .brand-identifier span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 50%;
+            filter: blur(4px);
+            opacity: 0.7;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @media (max-width: 768px) {
+            .brand-identifier span {
+                font-size: 36px;
+            }
+        }
+        
+        .brand-identifier::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0.2;
+            animation: sparkle 6s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: translateX(-30%) translateY(-20%) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateX(30%) translateY(20%) rotate(360deg); opacity: 0; }
+        }
+        
+        .brand-identifier span {
+            display: inline-block;
+            transform: translateY(0);
+            animation: letter-float 3s ease-in-out infinite;
+            animation-delay: calc(0.1s * var(--i));
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes letter-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+            25% { transform: translateY(-10px) rotate(-5deg); text-shadow: 0 0 15px rgba(255,255,255,0.9), 0 0 20px var(--accent); }
+            75% { transform: translateY(-5px) rotate(5deg); text-shadow: 0 0 15px rgba(255,255,255,0.9), 0 0 20px var(--primary); }
+        }
+        
+        .brand-identifier span:nth-child(odd) {
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary), 0 0 20px rgba(255,107,107,0.8);
+        }
+        
+        .brand-identifier span:nth-child(even) {
+            color: #fff;
+            text-shadow: 0 0 10px var(--secondary), 0 0 20px rgba(78,205,196,0.8);
+        }
+        
+        .brand-identifier span:nth-child(3n) {
+            color: #fff;
+            text-shadow: 0 0 10px var(--accent), 0 0 20px rgba(255,230,109,0.8);
+        }
+        
+        .topbar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topbar i {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            line-height: 50px;
+            text-align: center;
+            margin-right: 15px;
+            transition: all 0.3s;
+        }
+        
+        .topbar i:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: rotate(10deg);
+        }
+        
+        .navbar {
+            background-color: white !important;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .navbar-brand h1 {
+            color: var(--dark);
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand i {
+            color: var(--primary);
+        }
+        
+        .nav-item .nav-link {
+            font-family: 'Roboto', sans-serif;
+            position: relative;
+            margin-left: 30px;
+            padding: 30px 0;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--dark);
+            outline: none;
+            transition: .9s;
+        }
+        
+        .nav-item .nav-link:hover {
+            background-color: rgba(255, 107, 107, 0.1);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .nav-item .nav-link.active {
+            background-color: rgba(255, 107, 107, 0.2);
+            color: var(--primary);
+        }
+        
+        .nav-contact {
+            background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
+            padding: 12px 25px;
+            margin-left: 15px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+            transition: 0.3s;
+        }
+        
+        .nav-contact:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
+            border-radius: 30px;
+            padding: 12px 25px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(78, 205, 196, 0.8)), url('https://via.placeholder.com/1200x400') center/cover no-repeat;
+            padding: 70px 0;
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-actions .btn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            background-color: white;
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-actions .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero-actions .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .hero-actions .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .mongodb-operations {
+            padding: 40px 0;
+            background-color: rgba(78, 205, 196, 0.05);
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .operation-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .operation-btn {
+            background: white;
+            border: none;
+            border-radius: 10px;
+            padding: 20px 30px;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .operation-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+        
+        .operation-btn:hover::before {
+            left: 100%;
+        }
+        
+        .operation-btn i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .operation-btn h4 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .operation-btn p {
+            margin: 10px 0 0;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        .operation-insert {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .operation-update {
+            color: var(--secondary);
+            border-bottom: 3px solid var(--secondary);
+        }
+        
+        .operation-read {
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        .operation-delete {
+            color: #6A5ACD;
+            border-bottom: 3px solid #6A5ACD;
+        }
+        
+        .operation-btn:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .delete-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .delete-modal-content {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .delete-modal-header {
+            color: #6A5ACD;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 20px;
+            cursor: pointer;
+            background: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .delete-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .delete-form input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .delete-form input:focus {
+            border-color: #6A5ACD;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.2);
+        }
+        
+        .delete-form button {
+            background: #6A5ACD;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .delete-form button:hover {
+            background: #5849b6;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(106, 90, 205, 0.3);
+        }
+        
+        .paw-print {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .paw-print-1 {
+            top: 10%;
+            left: 5%;
+            transform: rotate(25deg);
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        .paw-print-2 {
+            top: 30%;
+            right: 7%;
+            transform: rotate(-15deg);
+            animation: float 7s ease-in-out infinite;
+        }
+        
+        .paw-print-3 {
+            bottom: 20%;
+            left: 10%;
+            transform: rotate(10deg);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transition: all 0.5s;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Pet List Styles from petlist.html */
+        .pr-pet-list-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .pr-section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .pr-pet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .pr-pet-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            background-color: #fff;
+        }
+        
+        .pr-pet-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pr-pet-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .pr-pet-details {
+            padding: 15px;
+        }
+        
+        .pr-pet-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+        }
+        
+        .pr-pet-breed {
+            color: #666;
+            font-style: italic;
+            margin: 0 0 10px 0;
+        }
+        
+        .pr-pet-description {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .pr-pet-location {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .pr-pet-location i {
+            margin-right: 5px;
+            color: #e74c3c;
+        }
+        
+        .pr-no-pets {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 50px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .pr-loading {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 50px;
+        }
+        
+        .pr-return-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .pr-return-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .pr-search-form {
+            margin: 20px 0;
+        }
+        
+        .pr-input-group {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .pr-search-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+        
+        .pr-search-btn {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .pr-search-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .pr-pet-single {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .pr-pet-single {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .pr-pet-single .pr-pet-image {
+            height: 300px;
+            border-radius: 10px;
+        }
+        
+        .pr-pet-single .pr-pet-details {
+            padding: 20px;
+        }
+        
+        .pr-pet-single .pr-pet-name {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .pr-pet-single .pr-pet-breed {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .pr-pet-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        
+        .pr-pet-info-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .pr-pet-info-item i {
+            width: 30px;
+            height: 30px;
+            background-color: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: #3498db;
+        }
+        
+        .pr-pet-desc-title {
+            font-size: 1.2rem;
+            margin: 15px 0 10px 0;
+        }
+        
+        .pr-pet-single .pr-pet-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .pr-pet-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .pr-back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .pr-back-btn:hover {
+            background-color: #5a6268;
+            color: white;
+        }
+        
+        .pr-pet-view-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .pr-pet-view-btn:hover {
+            background-color: #2980b9;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Enhanced KSI-ISS032 Brand Identifier -->
+    <div class="brand-identifier">
+        <span style="--i:1">T</span>
+        <span style="--i:2">E</span>
+        <span style="--i:3">A</span>
+        <span style="--i:4">M</span>
+        <span style="--i:5">-</span>
+        <span style="--i:6">N</span>
+        <span style="--i:7">O</span>
+        <span style="--i:8">-</span>
+        <span style="--i:9">0</span>
+        <span style="--i:10">8</span>
+    </div>
+
+    <!-- Decorative Elements -->
+    <img src="https://via.placeholder.com/100" alt="Paw Print" class="paw-print paw-print-1">
+    <img src="https://via.placeholder.com/100" alt="Paw Print" class="paw-print paw-print-2">
+    <img src="https://via.placeholder.com/100" alt="Paw Print" class="paw-print paw-print-3">
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0 mb-5">
+        <a href="/home.html" class="navbar-brand ms-lg-5">
+            <h1 class="m-0 text-uppercase text-dark"><i class="bi bi-shop fs-1 text-primary me-3"></i>Paw Store</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="/login.html" class="nav-item nav-link">LOGIN</a>
+                <a href="/home.html" class="nav-item nav-link active">Home</a>
+                <a href="/entry.html" class="nav-item nav-link">Entry</a>
+                <a href="/petlist.html" class="nav-item nav-link">Pet List</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="hero-title">Welcome to Pet Registry</h2>
+            <p class="hero-subtitle">A secure, user-friendly platform to register your beloved pets and connect with a community of animal lovers.</p>
+            <div class="hero-actions">
+                <a href="/entry.html" class="btn"><i class="fas fa-plus-circle"></i> Register a Pet</a>
+                <a href="/petlist.html" class="btn btn-secondary"><i class="fas fa-search"></i> Browse Pets</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MongoDB Operations Section -->
+    <section class="mongodb-operations">
+        <div class="container">
+            <h2 class="text-center mb-4">MongoDB CRUD Operations</h2>
+            <p class="text-center mb-5">Manage your pet database with these MongoDB operations. Insert new pets, update existing records, browse the pet collection, or remove pets from the database.</p>
+            <div class="operation-buttons">
+                <a href="/entry.html" class="operation-btn operation-insert">
+                    <i class="fas fa-plus-circle"></i>
+                    <h4>Create</h4>
+                    <p>Add a new pet to database</p>
+                </a>
+                <a href="/petlist.html" class="operation-btn operation-read">
+                    <i class="fas fa-search"></i>
+                    <h4>Read & Display</h4>
+                    <p>Browse all registered pets</p>
+                </a>
+                <a href="/update.html" class="operation-btn operation-update">
+                    <i class="fas fa-edit"></i>
+                    <h4>Update</h4>
+                    <p>Modify existing pet data</p>
+                </a>
+                <button id="openDeleteModal" class="operation-btn operation-delete">
+                    <i class="fas fa-trash-alt"></i>
+                    <h4>Delete</h4>
+                    <p>Remove a pet from database</p>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delete Modal -->
+    <div class="delete-modal" id="deleteModal">
+        <div class="delete-modal-content">
+            <div class="delete-modal-header">
+                <h3>Delete Pet Record</h3>
+                <span class="close-modal" id="closeDeleteModal">×</span>
+            </div>
+            <form class="delete-form" id="deleteForm">
+                <input type="text" id="petId" placeholder="Enter Pet ID" required>
+                <button type="submit">Delete Pet</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 py-4">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-md-0">© <a class="text-white" href="#">Paw Store</a>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Designed by: <a class="text-white" href="#">Team-No-08</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top">
+        <i class="bi bi-arrow-up text-white"></i>
+    </a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 300) {
+                $('.back-to-top').addClass('show');
+            } else {
+                $('.back-to-top').removeClass('show');
+            }
+        });
+        $('.back-to-top').click(function () {
+            $('html, body').animate({scrollTop: 0}, 500);
+            return false;
+        });
+
+        const deleteModal = document.getElementById('deleteModal');
+        const openDeleteBtn = document.getElementById('openDeleteModal');
+        const closeDeleteBtn = document.getElementById('closeDeleteModal');
+
+        if (openDeleteBtn) {
+            openDeleteBtn.addEventListener('click', () => {
+                deleteModal.style.display = 'flex';
+            });
+        }
+
+        if (closeDeleteBtn) {
+            closeDeleteBtn.addEventListener('click', () => {
+                deleteModal.style.display = 'none';
+            });
+        }
+
+        window.addEventListener('click', (event) => {
+            if (event.target == deleteModal) {
+                deleteModal.style.display = 'none';
+            }
+        });
+
+        function isValidPetId(petId) {
+            return petId && petId.match(/^[A-Z][a-z]+[A-Z][a-z]+[MF][0-9]{4}$/);
+        }
+
+        const deleteForm = document.getElementById('deleteForm');
+        if (deleteForm) {
+            deleteForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const petId = document.getElementById('petId').value;
+
+                if (!isValidPetId(petId)) {
+                    alert('Please enter a valid Pet ID (e.g., DogLabradorM1234). It should contain Species (capitalized), Breed (capitalized), Gender (M/F), and 4 digits.');
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`http://localhost:5000/api/pets/${petId}`, {
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert(`Pet with ID ${petId} has been successfully deleted from the database.`);
+                        deleteModal.style.display = 'none';
+                        deleteForm.reset();
+                    } else {
+                        alert(`Error: ${data.error || 'Failed to delete the pet. Invalid Pet ID or pet not found.'}`);
+                    }
+                } catch (error) {
+                    console.error('Delete operation failed:', error);
+                    alert('Failed to delete the pet. Please check if the Pet ID is valid and the server is running.');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
