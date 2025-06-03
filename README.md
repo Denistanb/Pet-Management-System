@@ -29,16 +29,19 @@ The **Pet Management System** is a web application designed for managing pet rec
 ---
 
 ## 📂 Project Structure
+
+```
 Pet-Management-System/
 ├── public/
-│ ├── login.html
-│ ├── register.html
-│ ├── entry.html
-│ ├── petlist.html
-│ ├── update.html
-│ └── home.html
+│   ├── login.html
+│   ├── register.html
+│   ├── entry.html
+│   ├── petlist.html
+│   ├── update.html
+│   └── home.html
 ├── server.py
 └── README.md
+```
 
 - **public/**: Contains frontend HTML pages.
 - **server.py**: Core backend logic for API and server routing.
